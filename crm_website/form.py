@@ -1,6 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
+from .models import Record
 
 class SignUpForm(UserCreationForm):
     email= forms.EmailField(label="", widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Enter Your Email'}))
@@ -28,3 +29,20 @@ class SignUpForm(UserCreationForm):
         self.fields['password2'].widget.attrs['placeholder'] = 'Confirm Password'
         self.fields['password2'].label = ''
         self.fields['password2'].help_text = '<span class="form-text text-muted"><small>Enter the same password as before, for verification.</small></span>'	
+
+
+
+# Create Add Record Form
+class AddRecordForm(forms.ModelForm):
+	first_name = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"First Name", "class":"form-control gfg border rounded-pill border-dark"}), label="")
+	last_name = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Last Name", "class":"form-control gfg border rounded-pill border-dark"}), label="")
+	Email = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Email", "class":"form-control gfg border rounded-pill border-dark"}), label="")
+	Phone_number = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Phone", "class":"form-control gfg border rounded-pill border-dark"}), label="")
+	Address = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Address", "class":"form-control gfg border rounded-pill border-dark"}), label="")
+	State = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"State", "class":"form-control gfg border rounded-pill border-dark"}), label="")
+	City = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"City", "class":"form-control gfg border rounded-pill border-dark"}), label="")
+	Pin_code = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Zipcode", "class":"form-control gfg border rounded-pill border-dark"}), label="")
+
+	class Meta:
+		model = Record
+		exclude = ("user",)
